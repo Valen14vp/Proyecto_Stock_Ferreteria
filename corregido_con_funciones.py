@@ -595,16 +595,17 @@ if __name__ == "__main__":
             
             mail = input("Ingrese su nombre de usuario: ")
             contraseña = input("Ingrese su contraseña: ")
-            credenciales_validas = False
+            credenciales_validas = False # Variable para controlar si las credenciales son correctas
             
             # Validar las credenciales del usuario
             
-            for usuario in mostrarUsuarios(2):  # 
-                if mail == usuario[1] and contraseña == usuario[2]:
-                    if usuario[3] == usuario_tipo:
+            for usuario in mostrarUsuarios(2):  # llama a la funcion mostrarUsuarios en la posicion 2 que se encarga de crear una lista con todos los usuarios de la BD
+                if mail == usuario[1] and contraseña == usuario[2]:# Si el correo y contraseña son correctos realiza las siguientes acciones
+                    if usuario[3] == usuario_tipo: # Si el rol del usuario es igual al seleccionado
+                        
                         # Crear una instancia de la clase Usuario
                         
-                        p1 = Usuario(usuario[1], usuario[3])
+                        p1 = Usuario(usuario[1], usuario[3])# Se crea una instancia de la clase Usuario con el nombre del usuario y el rol
                         p1.inicio_de_sesion_correcto()
                         
                         # Acciones específicas para vendedor o administrador
