@@ -63,7 +63,7 @@ def agregarArticulo(nombre, precio, seccion, marca):
 
 #Funcion de ordenamiento ascendente para tabla de stock
 
-def ordenarArticulosNomAsc():
+def ordenarArticulosNomAsc(): #Ordenar ascendentemente
     conexion = conectarDB1()  # Conectamos a la base de datos
     if conexion:
         try:
@@ -71,17 +71,17 @@ def ordenarArticulosNomAsc():
 
             # Consultar y ordenar por nombre de forma ascendente
             miCursor.execute('SELECT * FROM STOCKDISPONIBLE ORDER BY NOMBRE_ARTICULO ASC')
-            articulos = miCursor.fetchall()
+            articulos = miCursor.fetchall() # Obtenemos todos los registros
 
             if not articulos:  # Si no hay registros
                 print("No hay artículos en el stock.")
             else:
                 print(f"{'ID':<5} {'Nombre Artículo':<20} {'Precio':<10} {'Sección':<15} {'Marca':<15}")
-                print("-" * 65)
+                print("-" * 65) # Imprimimos el encabezado
                 for articulo in articulos:
-                    print(f"{articulo[0]:<5} {articulo[1]:<20} {articulo[2]:<10.2f} {articulo[3]:<15} {articulo[4]:<15}")
+                    print(f"{articulo[0]:<5} {articulo[1]:<20} {articulo[2]:<10.2f} {articulo[3]:<15} {articulo[4]:<15}") # Imprimimos los registros
 
-        except sqlite3.Error as error:
+        except sqlite3.Error as error: 
             print("Error al ordenar el artículo:", error)  # Manejamos errores si surgen
             conexion.rollback()  # Realizamos un rollback si hay errores
             conexion.close()  # Cerramos la conexión con la base de datos
@@ -96,15 +96,15 @@ def ordenarArticulosPreAsc():
 
             # Consultar y ordenar por nombre de forma ascendente
             miCursor.execute('SELECT * FROM STOCKDISPONIBLE ORDER BY PRECIO ASC')
-            articulos = miCursor.fetchall()
+            articulos = miCursor.fetchall() # Obtenemos todos los registros
 
             if not articulos:  # Si no hay registros
                 print("No hay artículos en el stock.")
             else:
                 print(f"{'ID':<5} {'Nombre Artículo':<20} {'Precio':<10} {'Sección':<15} {'Marca':<15}")
-                print("-" * 65)
-                for articulo in articulos:
-                    print(f"{articulo[0]:<5} {articulo[1]:<20} {articulo[2]:<10.2f} {articulo[3]:<15} {articulo[4]:<15}")
+                print("-" * 65)  # Imprimimos el encabezado
+                for articulo in articulos: 
+                    print(f"{articulo[0]:<5} {articulo[1]:<20} {articulo[2]:<10.2f} {articulo[3]:<15} {articulo[4]:<15}") # Imprimimos los registros
 
         except sqlite3.Error as error:
             print("Error al ordenar el artículo:", error)  # Manejamos errores si surgen
@@ -121,15 +121,15 @@ def ordenarArticulosNomDesc():
 
             # Consultar y ordenar por nombre de forma ascendente
             miCursor.execute('SELECT * FROM STOCKDISPONIBLE ORDER BY NOMBRE_ARTICULO DESC')
-            articulos = miCursor.fetchall()
+            articulos = miCursor.fetchall() # Obtenemos todos los registros
 
             if not articulos:  # Si no hay registros
                 print("No hay artículos en el stock.")
             else:
                 print(f"{'ID':<5} {'Nombre Artículo':<20} {'Precio':<10} {'Sección':<15} {'Marca':<15}")
-                print("-" * 65)
+                print("-" * 65)  # Imprimimos el encabezado
                 for articulo in articulos:
-                    print(f"{articulo[0]:<5} {articulo[1]:<20} {articulo[2]:<10.2f} {articulo[3]:<15} {articulo[4]:<15}")
+                    print(f"{articulo[0]:<5} {articulo[1]:<20} {articulo[2]:<10.2f} {articulo[3]:<15} {articulo[4]:<15}")  # Imprimimos los registros
 
         except sqlite3.Error as error:
             print("Error al ordenar el artículo:", error)  # Manejamos errores si surgen
@@ -152,9 +152,9 @@ def ordenarArticulosPreDesc():
                 print("No hay artículos en el stock.")
             else:
                 print(f"{'ID':<5} {'Nombre Artículo':<20} {'Precio':<10} {'Sección':<15} {'Marca':<15}")
-                print("-" * 65)
+                print("-" * 65)  # Imprimimos el encabezado
                 for articulo in articulos:
-                    print(f"{articulo[0]:<5} {articulo[1]:<20} {articulo[2]:<10.2f} {articulo[3]:<15} {articulo[4]:<15}")
+                    print(f"{articulo[0]:<5} {articulo[1]:<20} {articulo[2]:<10.2f} {articulo[3]:<15} {articulo[4]:<15}")  # Imprimimos los registros
 
         except sqlite3.Error as error:
             print("Error al ordenar el artículo:", error)  # Manejamos errores si surgen
@@ -168,7 +168,7 @@ def ordenarArticulosPreDesc():
 # Realiza la conexión, ejecuta una consulta para obtener todos los registros y los muestra en pantalla
 def mostrarArticulos():
     conexion = conectarDB1()  # Conectamos a la base de datos
-    if conexion:
+    if conexion: # Si la conexion es exitosa
         try:
             miCursor = conexion.cursor()  # Creamos un cursor para ejecutar comandos SQL
 
@@ -192,13 +192,13 @@ def mostrarArticulos():
 # Si hay un error, maneja las excepciones y realiza un rollback
 def actualizarArticulo(id_articulo, nombre, precio, seccion, marca):
     conexion = conectarDB1()  # Conectamos a la base de datos
-    if conexion:
+    if conexion:  # Si la conexion es exitosa
         try:
             miCursor = conexion.cursor()  # Creamos un cursor para ejecutar comandos SQL
 
             # Actualizamos el registro con el ID proporcionado con los nuevos datos
             miCursor.execute("UPDATE STOCKDISPONIBLE SET NOMBRE_ARTICULO = ?, PRECIO = ?, SECCION = ?, MARCA = ? WHERE ID = ?",
-                            (nombre, precio, seccion, marca, id_articulo))
+                            (nombre, precio, seccion, marca, id_articulo)) # Actualizamos los datos
 
             conexion.commit()  # Confirmamos los cambios en la base de datos
             conexion.close()  # Cerramos la conexión con la base de datos
@@ -211,14 +211,14 @@ def actualizarArticulo(id_articulo, nombre, precio, seccion, marca):
 # Función para borrar un artículo del stock
 # Realiza la conexión, elimina el registro con el ID proporcionado y muestra un mensaje de éxito o error
 # Si hay un error, maneja las excepciones y realiza un rollback
-def eliminarArticulo(id_articulo):
+def eliminarArticulo(id_articulo):  
     conexion = conectarDB1()  # Conectamos a la base de datos
-    if conexion:
+    if conexion:  # Si la conexion es exitosa
         try:
             miCursor = conexion.cursor()  # Creamos un cursor para ejecutar comandos SQL
 
             # Eliminamos el registro con el ID proporcionado de la tabla STOCKDISPONIBLE
-            miCursor.execute("DELETE FROM STOCKDISPONIBLE WHERE ID = ?", (id_articulo,))
+            miCursor.execute("DELETE FROM STOCKDISPONIBLE WHERE ID = ?", (id_articulo,)) # Eliminamos el registro
 
             conexion.commit()  # Confirmamos los cambios en la base de datos
             conexion.close()  # Cerramos la conexión con la base de datos
@@ -244,9 +244,9 @@ def mostrarBaseDatos():
             print("No hay artículos en el stock.")
         else:
             print(f"{'ID':<5} {'Nombre Artículo':<20} {'Precio':<10} {'Sección':<15} {'Marca':<15}")
-            print("-" * 65)
+            print("-" * 65)  # Imprimimos el encabezado
             for articulo in articulos:
-                print(f"{articulo[0]:<5} {articulo[1]:<20} {articulo[2]:<10.2f} {articulo[3]:<15} {articulo[4]:<15}")
+                print(f"{articulo[0]:<5} {articulo[1]:<20} {articulo[2]:<10.2f} {articulo[3]:<15} {articulo[4]:<15}")   # Imprimimos los registros
     except sqlite3.Error as error:
         print("Error al mostrar la base de datos:", error)  # Manejamos errores si surgen
     finally:
@@ -254,27 +254,27 @@ def mostrarBaseDatos():
             conexion.close()  # Aseguramos cerrar la conexión
 
 def ordenamiento():
-    print("¿Como desea ordenarlo?")
+    print("¿Como desea ordenarlo?") 
     print("1. Nombre Ascendente")
     print("2. Nombre Descendente")
     print("3. Precio Ascendente")
     print("4. Precio Descendente")
-    opcion = input()
+    opcion = input() # Solicitamos la opcion
         
     if  opcion == "1":
         ordenarArticulosNomAsc() # Ordenar ascendentemente
     elif opcion == "2":
         ordenarArticulosNomDesc() # Ordenar descendentemente
     elif opcion == "3":
-        ordenarArticulosPreAsc() 
+        ordenarArticulosPreAsc() # Ordenar ascendentemente
     elif opcion == "4":
-        ordenarArticulosPreDesc() 
+        ordenarArticulosPreDesc()  # Ordenar descendentemente
     else:
         print("Opción no válida. Por favor, ingrese un número del 1 al 4.")  # Manejar opción inválida
 
 # Función para mostrar el menú y obtener la opción elegida
 def mostrarMenu():
-    print("\n** MENÚ **")
+    print("\n** MENÚ **")  # Imprimimos el menú
     print("1. Agregar artículo")
     print("2. Mostrar artículos")
     print("3. Actualizar artículo")
@@ -308,7 +308,7 @@ def eliminarArticuloTeclado():
     
 
 # Función principal del programa
-def programa():
+def programa(): 
     CrearDB1()  # Llamamos a la función para crear la base de datos si no existe
     
     while True:  # Ejecutamos el programa en un bucle infinito hasta que el usuario elija salir
@@ -325,7 +325,7 @@ def programa():
         elif opcion == "5":
             mostrarBaseDatos()  # Mostrar base de datos completa
         elif opcion == "6":
-            ordenamiento()
+            ordenamiento()  # Ordenar Stock
         elif opcion == "7":
             print("¡Hasta luego!")  # Salir del programa
             break  # Salir del bucle infinito
@@ -375,7 +375,7 @@ def conectarBD():
 # Función para agregar un usuario a la base de datos
 def agregarUsuario(nombre_usuario, contrasena, rol):
     conexion = conectarBD()  # Conecta a la base de datos
-    if conexion:
+    if conexion:  # Si la conexion es exitosa
         try:
             miCursor = conexion.cursor()  # Crea un cursor para ejecutar comandos SQL
 
@@ -394,7 +394,7 @@ def agregarUsuario(nombre_usuario, contrasena, rol):
 # Función para mostrar todos los usuarios
 def mostrarUsuarios(eleccion):
     conexion = conectarBD()  # Conecta a la base de datos
-    if conexion:
+    if conexion:  # Si la conexion es exitosa
         try:
             miCursor = conexion.cursor()  # Crea un cursor para ejecutar comandos SQL
 
@@ -411,14 +411,14 @@ def mostrarUsuarios(eleccion):
                     print("Usuarios en la base de datos:")
 
                     print(f"{'ID':<5} {'Nombre Usuario':<20} {'Contraseña':<20} {'Rol':<10}")
-                    print("-" * 65)
+                    print("-" * 65)  # Imprime una línea separadora
                     for usuarios in usuarios:# Itera sobre los registros y los muestra en pantalla
-                        print(f"{usuarios[0]:<5} {usuarios[1]:<20} {usuarios[2]:<20} {usuarios[3]:<10}")
-                elif eleccion==2:
-                    lista_usuarios=[]
-                    for usuario in usuarios:
-                        lista_usuarios.append(usuario)
-                    return lista_usuarios
+                        print(f"{usuarios[0]:<5} {usuarios[1]:<20} {usuarios[2]:<20} {usuarios[3]:<10}")  # Muestra el ID, nombre de usuario, contraseña y rol
+                elif eleccion==2:  # Si la elección es 2
+                    lista_usuarios=[]  # Crea una lista para almacenar los usuarios
+                    for usuario in usuarios:  # Itera sobre los registros y los agrega a la lista
+                        lista_usuarios.append(usuario)  # Agrega el usuario a la lista
+                    return lista_usuarios  # Retorna la lista
 
         except sqlite3.Error as error:
             print("Error al mostrar los usuarios:", error)  # Maneja errores si surgen
@@ -426,7 +426,7 @@ def mostrarUsuarios(eleccion):
 # Función para actualizar la contraseña de un usuario
 def actualizarContrasena(nombre_usuario, nueva_contrasena):
     conexion = conectarBD()  # Conecta a la base de datos
-    if conexion:
+    if conexion:  # Si la conexion es exitosa
         try:
             miCursor = conexion.cursor()  # Crea un cursor para ejecutar comandos SQL
 
@@ -445,7 +445,7 @@ def actualizarContrasena(nombre_usuario, nueva_contrasena):
 # Función para eliminar un usuario
 def eliminarUsuario(nombre_usuario):
     conexion = conectarBD()  # Conecta a la base de datos
-    if conexion:
+    if conexion:    # Si la conexion es exitosa
         try:
             miCursor = conexion.cursor()  # Crea un cursor para ejecutar comandos SQL
 
@@ -462,15 +462,15 @@ def eliminarUsuario(nombre_usuario):
 
 # Función para el menú de selección de operaciones
 def menu():
-    print("\n** MENÚ **")
+    print("\n** MENÚ **")  # Imprimimos el menú
     print("1. Agregar usuario")
     print("2. Mostrar usuarios")
     print("3. Actualizar contraseña")
     print("4. Eliminar usuario")
     print("5. Volver")
 
-    opcion = input("Seleccione la opción que desee: ")
-    return opcion
+    opcion = input("Seleccione la opción que desee: ")  # Solicitamos la opción al usuario
+    return opcion  # Retornamos la opcion
 
 # Ejemplo de uso:
 crearBD()  # Llama a la función para crear la base de datos si no existe
@@ -488,7 +488,7 @@ crearBD()  # Llama a la función para crear la base de datos si no existe
 
 def mostrarBaseDatosVendedor():
     conexion = conectarDB1()  # Conectamos a la base de datos
-    if conexion:
+    if conexion:  # Si la conexion es exitosa
         try:
             miCursor = conexion.cursor()  # Creamos un cursor para ejecutar comandos SQL
 
@@ -502,40 +502,40 @@ def mostrarBaseDatosVendedor():
                 print("No hay artículos en el stock.")
             else:
                 print(f"{'ID':<5} {'Nombre Artículo':<20} {'Precio':<10} {'Sección':<15} {'Marca':<15}")
-                print("-" * 65)
+                print("-" * 65)  # Imprimimos el encabezado
                 for articulo in articulos:
-                    print(f"{articulo[0]:<5} {articulo[1]:<20} {articulo[2]:<10.2f} {articulo[3]:<15} {articulo[4]:<15}")
+                    print(f"{articulo[0]:<5} {articulo[1]:<20} {articulo[2]:<10.2f} {articulo[3]:<15} {articulo[4]:<15}")  # Imprimimos los registros
         except sqlite3.Error as error:
             print("Error al mostrar la base de datos:", error)  # Manejamos errores si surgen
 
 # función para que el vendedor seleccione artículos y calcule el total a pagar
 def seleccionarArticulosVendedor():
-    total_pagar = 0
-    while True:
+    total_pagar = 0  # Variable para almacenar el total a pagar
+    while True:  # Bucle para permitir que el vendedor seleccione artículos
         mostrarBaseDatosVendedor()  # Mostramos la base de datos al vendedor
-        id_articulo = int(input("Ingrese el ID del artículo que desea agregar al carrito (0 para finalizar): "))
-        if id_articulo == 0:
+        id_articulo = int(input("Ingrese el ID del artículo que desea agregar al carrito (0 para finalizar): "))  # Solicitamos el ID del artículo
+        if id_articulo == 0:  # Si el ID es 0
             break  # El vendedor ha finalizado la selección
         else:
-            cantidad = int(input("Ingrese la cantidad de unidades: "))
+            cantidad = int(input("Ingrese la cantidad de unidades: "))  # Solicitamos la cantidad
 
-            conexion = conectarDB1()
-            if conexion:
-                try:
+            conexion = conectarDB1()  # Conectamos a la base de datos
+            if conexion:  # Si la conexion es exitosa
+                try: 
                     miCursor = conexion.cursor()
                     # Obtenemos el precio del artículo seleccionado
-                    miCursor.execute("SELECT PRECIO FROM STOCKDISPONIBLE WHERE ID = ?", (id_articulo,))
-                    precio_unitario = miCursor.fetchone()[0]
+                    miCursor.execute("SELECT PRECIO FROM STOCKDISPONIBLE WHERE ID = ?", (id_articulo,)) # Obtenemos el precio
+                    precio_unitario = miCursor.fetchone()[0] # Obtenemos el precio
                     # Calculamos el subtotal y lo sumamos al total a pagar
                     subtotal = cantidad * precio_unitario
                     total_pagar += subtotal
-                    print(f"Artículo agregado al carrito. Subtotal: ${subtotal}")
+                    print(f"Artículo agregado al carrito. Subtotal: ${subtotal}")  # Imprimimos el subtotal
                 except sqlite3.Error as error:
-                    print("Error al procesar la selección:", error)
+                    print("Error al procesar la selección:", error)  # Manejamos errores si surgen
                 finally:
-                    conexion.close()
+                    conexion.close()  # Aseguramos cerrar la conexion
 
-    print(f"\nTotal a pagar: ${total_pagar}")
+    print(f"\nTotal a pagar: ${total_pagar}")  # Imprimimos el total a pagar
 
 
 
@@ -547,43 +547,44 @@ def seleccionarArticulosVendedor():
 
 
 class Usuario:
-    def __init__(self, nombre_usuario, cargo):
-        self.nombre_usuario = nombre_usuario
-        self.cargo = cargo
+    def __init__(self, nombre_usuario, cargo): # Constructor
+        self.nombre_usuario = nombre_usuario  # Atributos
+        self.cargo = cargo # Atributos
     
-    def inicio_de_sesion_correcto(self):
-        print(f"Bienvenido {self.nombre_usuario}")
+    def inicio_de_sesion_correcto(self): # Funciones
+        print(f"Bienvenido {self.nombre_usuario}") # Imprimimos el nombre del usuario
     
-    def inicio_de_sesion_incorrecto(self):
-        print("usuario/contraseña incorrecta")
+    def inicio_de_sesion_incorrecto(self): # Funciones
+        print("usuario/contraseña incorrecta") # Imprimimos el mensaje
 
 if __name__ == "__main__":
     # Inicialización del contador general para el bucle principal
     
-    contador_general = 0
+    contador_general = 0 # Inicializamos el contador
     
     while contador_general == 0:
         # Solicitar al usuario si desea registrarse o iniciar sesión
         
-        nuevo_viejo_usuario = input("Ingrese 'registrarse' o 'iniciar sesion': ").upper()
+        nuevo_viejo_usuario = input("Ingrese 'registrarse' o 'iniciar sesion': ").upper() # Solicitamos la opción
         
         if nuevo_viejo_usuario == "REGISTRARSE":
             # Obtener información del nuevo usuario
             
-            nombre_usuario = input("Ingrese el nombre de usuario: ")
+            nombre_usuario = input("Ingrese el nombre de usuario: ") 
             contrasena = input("Ingrese la contraseña: ")
             rol = input("Ingrese el rol (vendedor/administrador): ")
             
             # Llama a la función para agregar un usuario 
             
-            agregarUsuario(nombre_usuario, contrasena, rol)
+            agregarUsuario(nombre_usuario, contrasena, rol) # Llamamos a la función
         
         elif nuevo_viejo_usuario == "INICIAR SESION":
             # Selección del tipo de usuario (administrador o vendedor)
             
-            seleccionar_tipo_usuario = input("Ingrese como desea ingresar. Como administrador (AD) o vendedor (VE): ").upper()
+            seleccionar_tipo_usuario = input("Ingrese como desea ingresar. Como administrador (AD) o vendedor (VE): ").upper() # Solicitamos la opcion
             
-            if seleccionar_tipo_usuario == "AD":
+            # Validar la selección del tipo de usuario
+            if seleccionar_tipo_usuario == "AD":  
                 usuario_tipo = "administrador"
             elif seleccionar_tipo_usuario == "VE":
                 usuario_tipo = "vendedor"
@@ -606,7 +607,7 @@ if __name__ == "__main__":
                         # Crear una instancia de la clase Usuario
                         
                         p1 = Usuario(usuario[1], usuario[3])# Se crea una instancia de la clase Usuario con el nombre del usuario y el rol
-                        p1.inicio_de_sesion_correcto()
+                        p1.inicio_de_sesion_correcto() # Llama a la funcion inicio_de_sesion_correcto
                         
                         # Acciones específicas para vendedor o administrador
                         
@@ -614,29 +615,29 @@ if __name__ == "__main__":
                             print("vendedor")
                             # Llama a la función para seleccionar artículos del vendedor 
                             
-                            seleccionarArticulosVendedor() 
-                            credenciales_validas = True
+                            seleccionarArticulosVendedor()  # Llamamos a la funcion seleccionarArticulosVendedor
+                            credenciales_validas = True # Cambiamos la variable para indicar que las credenciales son correctas
                             break
                             
                         elif usuario_tipo == "administrador":
-                            contador_inicial_admin = 0
-                            while contador_inicial_admin == 0:
+                            contador_inicial_admin = 0 # Inicializamos el contador
+                            while contador_inicial_admin == 0: # Bucle infinito
                                 # Menú para el administrador
                                 
-                                divisor_secciones = input("Ingrese el área a la que desea entrar \nClientes-Proveedores(CP) / Stock(ST) / Usuario(US) / Cerrar App(FIN): ").upper()
+                                divisor_secciones = input("Ingrese el área a la que desea entrar \nClientes-Proveedores(CP) / Stock(ST) / Usuario(US) / Cerrar App(FIN): ").upper() # Solicitamos la opción
                                 
-                                if divisor_secciones == "CP":
-                                    print("Código para Clientes-Proveedores futura versión")
-                                    contador_inicial_admin = 0
-                                elif divisor_secciones == "ST":
+                                if divisor_secciones == "CP": # Si la seccion es Clientes-Proveedores
+                                    print("Código para Clientes-Proveedores futura versión") # Imprimimos el mensaje
+                                    contador_inicial_admin = 0 # Cerramos el contador
+                                elif divisor_secciones == "ST": # Si la seccion es Stock
                                     
                                     # Llama a la función principal del stock 
                                     
                                     programa()
                                     
                                     
-                                elif divisor_secciones == "US":
-                                    while True:
+                                elif divisor_secciones == "US": # Si la seccion es Usuario
+                                    while True: 
                                         
                                         # Menú de opciones para el administrador
                                         
@@ -650,7 +651,7 @@ if __name__ == "__main__":
                                             nombre_usuario = input("Ingrese el nombre de usuario: ")
                                             contrasena = input("Ingrese la contraseña: ")
                                             rol = input("Ingrese el rol (vendedor/administrador): ")
-                                            agregarUsuario(nombre_usuario, contrasena, rol)
+                                            agregarUsuario(nombre_usuario, contrasena, rol) 
                                             
                                         elif opcion == "2":
                                             # Llama a la función para mostrar todos los usuarios 
@@ -678,21 +679,21 @@ if __name__ == "__main__":
                                             
                                             break
                                         else:
-                                            print("Opción no válida. Por favor, seleccione una opción del 1 al 5.")
+                                            print("Opción no válida. Por favor, seleccione una opción del 1 al 5.")  # Mensaje de error
                                 
                                 elif divisor_secciones == "FIN":
                                     # Finaliza los bucles cuando se cierra la aplicación
                                     
-                                    contador_general = 1
-                                    contador_inicial_admin = 1
-                            credenciales_validas = True
+                                    contador_general = 1 # Cerramos el contador
+                                    contador_inicial_admin = 1 # Cerramos el contador
+                            credenciales_validas = True # Cambiamos la variable para indicar que las credenciales son correctas
                             break
             
             # Si las credenciales no son válidas, mostrar mensaje de inicio de sesión incorrecto
             
-            if not credenciales_validas:
-                p1 = Usuario("desconocido", "desconocido")
-                p1.inicio_de_sesion_incorrecto()
+            if not credenciales_validas: # Si las credenciales no son correctas
+                p1 = Usuario("desconocido", "desconocido") # Se crea una instancia de la clase Usuario
+                p1.inicio_de_sesion_incorrecto() # Llama a la funcion inicio_de_sesion_incorrecto
 #-------------------------------------------------------------------------------------------------------------------------------------------------------------
 #-------------------------------------------------------------------------------------------------------------------------------------------------------------
 #-------------------------------------------------------------------------------------------------------------------------------------------------------------
